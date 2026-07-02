@@ -1,0 +1,22 @@
+{
+  "name": "what-to-wear",
+  "version": "1.0.0",
+  "private": true,
+  "description": "What to Wear (Што да облечам) — daily outfit recommendations from real-time weather + your wardrobe. PWA, wrappable with Capacitor for Google Play.",
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "icons": "node scripts/gen-icons.mjs",
+    "build": "node scripts/build-www.mjs",
+    "android:add": "npm run build && npx cap add android",
+    "sync": "npm run build && npx cap sync android",
+    "open:android": "npx cap open android"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^6.1.2"
+  },
+  "dependencies": {
+    "@capacitor/core": "^6.1.2",
+    "@capacitor/android": "^6.1.2"
+  }
+}

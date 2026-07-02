@@ -1,0 +1,8 @@
+{
+  "appId": "com.ljupcho.whattowear",
+  "appName": "What to Wear",
+  "webDir": "www",
+  "android": {
+    "allowMixedContent": true
+  }
+}
