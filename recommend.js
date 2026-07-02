@@ -6,7 +6,7 @@
 (function (root, factory) {
   if (typeof module === "object" && module.exports) module.exports = factory();
   else root.WTW = factory();
-})(typeof self !== "undefined" ? self : this, function () {
+})(typeof self !== "undefined" ? self : (typeof globalThis !== "undefined" ? globalThis : this), function () {
   "use strict";
 
   var WARMTH_RANK = { light: 1, medium: 2, heavy: 3 };

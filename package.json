@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "private": true,
   "description": "What to Wear (Што да облечам) — daily outfit recommendations from real-time weather + your wardrobe. PWA, wrappable with Capacitor for Google Play.",
-  "type": "module",
   "scripts": {
     "test": "node --test",
     "icons": "node scripts/gen-icons.mjs",
