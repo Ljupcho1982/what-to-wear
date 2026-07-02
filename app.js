@@ -186,9 +186,28 @@
   //  Location helpers
   // ==========================================================================
   function useGps(cb) {
+    var onOk = function (lat, lon) { cb({ lat: lat, lon: lon, name: "My location" }); };
+
+    // Inside the Capacitor app, plain navigator.geolocation is blocked by the WebView.
+    // Use the native @capacitor/geolocation plugin, which drives the Android permission
+    // prompt and returns real GPS coordinates.
+    var cap = window.Capacitor;
+    var geo = cap && cap.Plugins && cap.Plugins.Geolocation;
+    if (cap && cap.isNativePlatform && cap.isNativePlatform() && geo) {
+      geo.requestPermissions().then(function () {
+        return geo.getCurrentPosition({ enableHighAccuracy: true, timeout: 10000 });
+      }).then(function (pos) {
+        onOk(pos.coords.latitude, pos.coords.longitude);
+      }).catch(function () {
+        alert("Location permission denied or unavailable. Enter a city instead.");
+      });
+      return;
+    }
+
+    // PWA / browser fallback.
     if (!navigator.geolocation) { alert("Geolocation not available on this device."); return; }
     navigator.geolocation.getCurrentPosition(function (pos) {
-      cb({ lat: pos.coords.latitude, lon: pos.coords.longitude, name: "My location" });
+      onOk(pos.coords.latitude, pos.coords.longitude);
     }, function () {
       alert("Couldn't get GPS location. Enter a city instead.");
     }, { timeout: 10000 });
